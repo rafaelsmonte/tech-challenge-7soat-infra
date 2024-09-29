@@ -31,6 +31,12 @@ jobs:
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
 
+      - name: Configure kubeconfig for EKS
+        run: |
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name tech-challenge-7soat
+          # Verificar se o kubeconfig foi criado corretamente
+          ls -la /home/runner/.kube/
+
       - name: Initialize Terraform
         run: terraform init
         working-directory: .
