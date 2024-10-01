@@ -1,3 +1,8 @@
+#============================================================================
+# Authors: Thiago, Vitor, Rafael
+# Description: Creates Lambda Infrastructure
+#============================================================================
+
 resource "aws_iam_role" "iam_role_7soat_lambda_execution" {
   name = var.lambda_role_name
 
