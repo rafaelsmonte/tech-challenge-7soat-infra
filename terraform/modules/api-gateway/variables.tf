@@ -43,22 +43,22 @@ variable "api_gateway_lambda_integration_payload_format_version" {
   type        = string
 }
 
-variable "api_gateway_eks_integration_integration_type" {
+variable "api_gateway_products_catalog_service_integration_type" {
   description = "The integration type for EKS integration (HTTP_PROXY)"
   type        = string
 }
 
-variable "api_gateway_eks_integration_integration_method" {
+variable "api_gateway_products_catalog_service_integration_method" {
   description = "The HTTP method for the EKS integration"
   type        = string
 }
 
-variable "api_gateway_eks_integration_connection_type" {
+variable "api_gateway_products_catalog_service_connection_type" {
   description = "The connection type for EKS integration (INTERNET)"
   type        = string
 }
 
-variable "api_gateway_eks_integration_integration_uri" {
+variable "api_gateway_products_catalog_service_integration_uri" {
   description = "The URI of the EKS integration for API Gateway"
   type        = string
 }
@@ -66,4 +66,44 @@ variable "api_gateway_eks_integration_integration_uri" {
 variable "api_gateway_auto_deploy" {
   description = "Whether to enable auto-deploy for the API Gateway"
   type        = bool
+}
+
+variable "api_gateway_orders_service_integration_type" {
+  description = "The type of integration for the orders service (e.g., HTTP_PROXY, AWS_PROXY)"
+  type        = string
+}
+
+variable "api_gateway_orders_service_integration_method" {
+  description = "The HTTP method used for the orders service integration (e.g., GET, POST, ANY)"
+  type        = string
+}
+
+variable "api_gateway_orders_service_connection_type" {
+  description = "The type of connection for the orders service integration (e.g., INTERNET, VPC_LINK)"
+  type        = string
+}
+
+variable "api_gateway_orders_service_integration_uri" {
+  description = "The URI for the orders service integration"
+  type        = string
+}
+
+variable "api_gateway_payments_service_integration_type" {
+  description = "The type of integration for the payments service (e.g., HTTP_PROXY, AWS_PROXY)"
+  type        = string
+}
+
+variable "api_gateway_payments_service_integration_method" {
+  description = "The HTTP method used for the payments service integration (e.g., GET, POST, ANY)"
+  type        = string
+}
+
+variable "api_gateway_payments_service_connection_type" {
+  description = "The type of connection for the payments service integration (e.g., INTERNET, VPC_LINK)"
+  type        = string
+}
+
+variable "api_gateway_payments_service_integration_uri" {
+  description = "The URI for the payments service integration"
+  type        = string
 }

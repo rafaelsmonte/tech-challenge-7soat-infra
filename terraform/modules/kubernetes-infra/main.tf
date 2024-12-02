@@ -2,13 +2,37 @@
 # Author: Thiago, Vitor, Rafael
 # Description: Creates Kubernetes Infrastructure
 #============================================================================
+resource "aws_security_group" "eks_cluster_tech_challenge_7soat_security_group" {
+  name        = var.eks_cluster_security_group_name
+  description = var.eks_cluster_security_group_description
+  vpc_id      = var.aws_vpc_id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1" # All protocols
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = var.eks_cluster_security_group_name
+  }
+}
+
 resource "aws_eks_cluster" "eks_cluster_tech_challenge_7soat" {
   name     = var.eks_cluster_name
   role_arn = var.eks_cluster_role_arn
 
   vpc_config {
     subnet_ids         = var.eks_subnet_ids
-    security_group_ids = var.eks_security_group_ids
+    security_group_ids = [resource.aws_security_group.eks_cluster_tech_challenge_7soat_security_group.id]
   }
 }
 

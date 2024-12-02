@@ -1,3 +1,8 @@
+variable "aws_vpc_id" {
+  description = "The AWS VPC ID"
+  type        = string
+}
+
 variable "eks_cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
@@ -10,11 +15,6 @@ variable "eks_cluster_role_arn" {
 
 variable "eks_subnet_ids" {
   description = "Comma-separated list of subnet IDs where EKS should deploy worker nodes"
-  type        = list(string)
-}
-
-variable "eks_security_group_ids" {
-  description = "Security group IDs for the EKS cluster"
   type        = list(string)
 }
 
@@ -64,5 +64,15 @@ variable "eks_node_group_disk_size" {
 
 variable "eks_node_group_access_key" {
   description = "The SSH key pair for remote access to the EKS node group instances."
+  type        = string
+}
+
+variable "eks_cluster_security_group_name" {
+  description = "The name of the EKS cluster security group"
+  type        = string
+}
+
+variable "eks_cluster_security_group_description" {
+  description = "The description of the EKS cluster security group"
   type        = string
 }

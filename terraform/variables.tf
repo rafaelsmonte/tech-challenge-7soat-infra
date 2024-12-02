@@ -1,3 +1,8 @@
+variable "aws_vpc_id" {
+  description = "The AWS VPC ID"
+  type        = string
+}
+
 variable "eks_cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
@@ -11,16 +16,6 @@ variable "eks_cluster_role_arn" {
 variable "eks_subnet_ids" {
   description = "Comma-separated list of subnet IDs where EKS should deploy worker nodes"
   type        = list(string)
-}
-
-variable "eks_security_group_ids" {
-  description = "Security group IDs for the EKS cluster"
-  type        = list(string)
-}
-
-variable "ecr_repository_name" {
-  description = "The name of the ECR repository to place images of 7soat api's"
-  type        = string
 }
 
 variable "eks_node_group_name" {
@@ -242,22 +237,22 @@ variable "api_gateway_lambda_integration_payload_format_version" {
   type        = string
 }
 
-variable "api_gateway_eks_integration_integration_type" {
+variable "api_gateway_products_catalog_service_integration_type" {
   description = "The integration type for EKS integration (HTTP_PROXY)"
   type        = string
 }
 
-variable "api_gateway_eks_integration_integration_method" {
+variable "api_gateway_products_catalog_service_integration_method" {
   description = "The HTTP method for the EKS integration"
   type        = string
 }
 
-variable "api_gateway_eks_integration_connection_type" {
+variable "api_gateway_products_catalog_service_connection_type" {
   description = "The connection type for EKS integration (INTERNET)"
   type        = string
 }
 
-variable "api_gateway_eks_integration_integration_uri" {
+variable "api_gateway_products_catalog_service_integration_uri" {
   description = "The URI of the EKS integration for API Gateway"
   type        = string
 }
@@ -265,4 +260,204 @@ variable "api_gateway_eks_integration_integration_uri" {
 variable "api_gateway_auto_deploy" {
   description = "Whether to enable auto-deploy for the API Gateway"
   type        = bool
+}
+
+variable "orders_service_queue_dlq_name" {
+  description = "Name of the dead-letter queue for the orders service."
+  type        = string
+}
+
+variable "orders_service_queue_dlq_delay_seconds" {
+  description = "Delay seconds for the dead-letter queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_dlq_max_message_size" {
+  description = "Maximum message size (in bytes) for the dead-letter queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_dlq_message_retention_seconds" {
+  description = "Message retention period (in seconds) for the dead-letter queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_dlq_receive_wait_time_seconds" {
+  description = "Receive wait time (in seconds) for the dead-letter queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_dlq_visibility_timeout_seconds" {
+  description = "Visibility timeout (in seconds) for the dead-letter queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_dlq_deduplication_scope" {
+  description = "Deduplication scope for the dead-letter queue of the orders service."
+  type        = string
+}
+
+variable "orders_service_queue_dlq_fifo_throughput_limit" {
+  description = "FIFO throughput limit for the dead-letter queue of the orders service."
+  type        = string
+}
+
+variable "orders_service_queue_name" {
+  description = "Name of the main SQS queue for the orders service."
+  type        = string
+}
+
+variable "orders_service_queue_delay_seconds" {
+  description = "Delay seconds for the main SQS queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_max_message_size" {
+  description = "Maximum message size (in bytes) for the main SQS queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_message_retention_seconds" {
+  description = "Message retention period (in seconds) for the main SQS queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_receive_wait_time_seconds" {
+  description = "Receive wait time (in seconds) for the main SQS queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_visibility_timeout_seconds" {
+  description = "Visibility timeout (in seconds) for the main SQS queue of the orders service."
+  type        = number
+}
+
+variable "orders_service_queue_deduplication_scope" {
+  description = "Deduplication scope for the main SQS queue of the orders service."
+  type        = string
+}
+
+variable "orders_service_queue_fifo_throughput_limit" {
+  description = "FIFO throughput limit for the main SQS queue of the orders service."
+  type        = string
+}
+
+variable "orders_service_queue_redrive_policy_max_receive_count" {
+  description = "Maximum receive count for the redrive policy of the orders service queue."
+  type        = number
+}
+
+variable "payments_service_queue_dlq_name" {
+  description = "Name of the dead-letter queue for the payments service."
+  type        = string
+}
+
+variable "payments_service_queue_dlq_delay_seconds" {
+  description = "Delay seconds for the dead-letter queue of the payments service."
+  type        = number
+}
+
+variable "payments_service_queue_dlq_max_message_size" {
+  description = "Maximum message size (in bytes) for the dead-letter queue of the payments service."
+  type        = number
+}
+
+variable "payments_service_queue_dlq_message_retention_seconds" {
+  description = "Message retention period (in seconds) for the dead-letter queue of the payments service."
+  type        = number
+}
+
+variable "payments_service_queue_dlq_receive_wait_time_seconds" {
+  description = "Receive wait time (in seconds) for the dead-letter queue of the payments service."
+  type        = number
+}
+
+variable "payments_service_queue_dlq_visibility_timeout_seconds" {
+  description = "Visibility timeout (in seconds) for the dead-letter queue of the payments service."
+  type        = number
+}
+
+variable "payments_service_queue_dlq_deduplication_scope" {
+  description = "Deduplication scope for the dead-letter queue of the payments service."
+  type        = string
+}
+
+variable "payments_service_queue_dlq_fifo_throughput_limit" {
+  description = "FIFO throughput limit for the dead-letter queue of the payments service."
+  type        = string
+}
+
+variable "payments_service_topic_name" {
+  description = "Name of the SNS topic for the payments service."
+  type        = string
+}
+
+variable "aws_account_id" {
+  description = "AWS account ID for topic access policies."
+  type        = string
+}
+
+variable "ecr_repository_payments_service_name" {
+  description = "Name of the payments service ecr repository"
+  type        = string
+}
+
+variable "ecr_repository_orders_service_name" {
+  description = "Name of the orders service ecr repository"
+  type        = string
+}
+
+variable "ecr_repository_products_catalog_name" {
+  description = "Name of the products service ecr repository"
+  type        = string
+}
+
+variable "eks_cluster_security_group_name" {
+  description = "The name of the EKS cluster security group"
+  type        = string
+}
+
+variable "eks_cluster_security_group_description" {
+  description = "The description of the EKS cluster security group"
+  type        = string
+}
+
+variable "api_gateway_orders_service_integration_type" {
+  description = "The type of integration for the orders service (e.g., HTTP_PROXY, AWS_PROXY)"
+  type        = string
+}
+
+variable "api_gateway_orders_service_integration_method" {
+  description = "The HTTP method used for the orders service integration (e.g., GET, POST, ANY)"
+  type        = string
+}
+
+variable "api_gateway_orders_service_connection_type" {
+  description = "The type of connection for the orders service integration (e.g., INTERNET, VPC_LINK)"
+  type        = string
+}
+
+variable "api_gateway_orders_service_integration_uri" {
+  description = "The URI for the orders service integration"
+  type        = string
+}
+
+variable "api_gateway_payments_service_integration_type" {
+  description = "The type of integration for the payments service (e.g., HTTP_PROXY, AWS_PROXY)"
+  type        = string
+}
+
+variable "api_gateway_payments_service_integration_method" {
+  description = "The HTTP method used for the payments service integration (e.g., GET, POST, ANY)"
+  type        = string
+}
+
+variable "api_gateway_payments_service_connection_type" {
+  description = "The type of connection for the payments service integration (e.g., INTERNET, VPC_LINK)"
+  type        = string
+}
+
+variable "api_gateway_payments_service_integration_uri" {
+  description = "The URI for the payments service integration"
+  type        = string
 }

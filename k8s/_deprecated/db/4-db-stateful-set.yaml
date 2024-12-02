@@ -1,0 +1,70 @@
+#==============================================================================
+# type: StatefulSet
+# description: Volume claim for database volume
+#==============================================================================
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tech-challenge-7soat-statefulset-db
+spec:
+  serviceName: "postgresql"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tech-challenge-7soat-statefulset-db
+  template:
+    metadata:
+      labels:
+        app: tech-challenge-7soat-statefulset-db
+    spec:
+      containers:
+        - name: postgresql
+          image: postgres:14
+          ports:
+            - containerPort: 5432
+          env:
+          - name: POSTGRES_PASSWORD
+            value: "tech_challenge_7soat"  # Static value
+          - name: POSTGRES_USER
+            value: "tech_challenge_7soat_7622"  # Static value
+          - name: POSTGRES_DB
+            value: "tech_challenge_7soat_db"  # Static value
+          volumeMounts:
+            - name: tech-challenge-7soat-volume-claim-db
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres-data
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "1000m"
+          readinessProbe:
+            exec:
+              command:
+              - pg_isready
+              - -h
+              - localhost
+              - -p
+              - "5432"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+              - pg_isready
+              - -h
+              - localhost
+              - -p
+              - "5432"
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            failureThreshold: 5
+  volumeClaimTemplates:
+    - metadata:
+        name: tech-challenge-7soat-volume-claim-db
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: tech-challenge-7soat-ebs-storage-class
