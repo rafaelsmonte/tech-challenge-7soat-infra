@@ -7,14 +7,26 @@ data:
     events {}
 
     stream {
-        upstream rds_backend {
-            server <rds_backend_url_here>:5432;
+        upstream payments_db {
+            server tech-challenge-7soat-payments-db-primary.cxeo4mo48u6m.us-east-1.rds.amazonaws.com:5432;
         }
 
         server {
             listen 55432;
 
-            proxy_pass rds_backend;
+            proxy_pass payments_db;
+            proxy_timeout 10s;
+            proxy_connect_timeout 10s;
+        }
+
+        upstream products_catalog_db {
+            server tech-challenge-7soat-products-catalog-db-primary.cxeo4mo48u6m.us-east-1.rds.amazonaws.com:5432;
+        }
+
+        server {
+            listen 55433;
+
+            proxy_pass products_catalog_db;
             proxy_timeout 10s;
             proxy_connect_timeout 10s;
         }
@@ -30,6 +42,7 @@ spec:
       image: nginx:latest
       ports:
         - containerPort: 55432
+        - containerPort: 55433
       volumeMounts:
         - name: nginx-config
           mountPath: /etc/nginx/nginx.conf
