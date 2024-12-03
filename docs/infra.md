@@ -2,7 +2,7 @@
 
 ## Overview
 
-<center><img src='./img/infra_architecture.png'></center>
+<center><img src='./img/architecture_infra.png'></center>
 
 <br>
 
